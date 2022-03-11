@@ -1,0 +1,26 @@
+#!/bin/bash
+# $Id: ism_gfupdate 88 2022-03-11 10:03:48Z HMBJOrth $
+#
+# ism_gfupdate - Update all firmware/driver from globalflash
+#
+# Can be used in crontab to periodically update ISM FW
+# GlobalFlash has to be activated on ISM first!
+#
+
+. ${0%/*}/.ism_env
+
+FWLIST=/tmp/fwlist.$$
+
+echo -n "Retrieving downloadable firmware/driver - Please wait ~2 minutes ... "
+ism_cmd post /system/settings/firmware/ftsfirmwarelist/download >/dev/null
+echo done
+
+echo "Saving downloadable firmware/driver list."
+ism_cmd get  /system/settings/firmware/ftsfirmwarelist | \
+	sed 's/"FirmwareList":/"ComponentList":/' >$FWLIST
+
+echo "Starting download ..."
+ism_cmd post /system/settings/firmware/ftsfirmware/download -d @$FWLIST | $JQ
+
+echo "Cleaning up."
+rm $FWLIST

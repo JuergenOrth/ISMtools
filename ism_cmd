@@ -1,0 +1,29 @@
+#!/bin/bash
+# (c) Juergen Orth ;-)
+# $Id: ism_cmd 85 2022-03-09 22:11:00Z HMBJOrth $
+#
+# Usage: ism_cmd <method> <rest endpoint> [add. params ..]
+
+[ "$DEBUG" ] && set -x
+
+# get common settings like IP address and user credentials (ISM_IP, ISM_PORT, USER, PASSWD, CACERT)
+DIR=${0%/*}
+PROG=${0##*/}
+. ${DIR}/.ism_env
+
+# just some defaults ==> w/o any args you will get the node list
+METHOD=${1:-GET}
+CMD=${2:-'nodes'}; shift 2
+
+[ -r "$CACERT" ] && CERTOPT="--cacert $CACERT" || CERTOPT="-k"
+
+if [ "$session_id" ]
+then
+	# With Session ID (you have to run 'export session_id=$(ism_login)' before running this script and afterwards "ism_logout")
+	AUTH="X-Ism-Authorization: $session_id"
+else
+	# w/o Session ID = One Time Authorization
+	AUTH="Authorization: ISM $(echo -n $USER:$PASSWD | openssl enc -aes-256-cbc -e -base64 -pass pass:$ISM_IP -A -md md5 2>/dev/null)"
+fi
+curl "https://$ISM_IP:$ISM_PORT/ism/api/v2/$CMD" -X ${METHOD^^} -H "$AUTH" -H "Content-Type: application/JSON; charset=UTF-8" $CERTOPT $DEFAULTOPTIONS $@
+echo
