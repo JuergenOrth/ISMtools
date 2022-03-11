@@ -1,5 +1,5 @@
 #!/bin/bash
-# $Id: ism_gfupdate 88 2022-03-11 10:03:48Z HMBJOrth $
+# $Id: ism_gfupdate 91 2022-03-11 11:23:29Z HMBJOrth $
 #
 # ism_gfupdate - Update all firmware/driver from globalflash
 #
