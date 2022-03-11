@@ -48,10 +48,11 @@ Usage: `ism_gfupdate`
 
 
 ## Examples
-1. Check if GlobalFlash is enabled
+1. Check if GlobalFlash is enabled (check end of output line: Mode should be true)
+
 ```shell
 $ ./ism_cmd get /system/settings/firmware/ftsfirmware
-{"SchemaType":"https://192.168.3.203:25566/ism/schema/v2/System/SystemSettingsFirmwareFtsFirmware-GET-Out.0.0.1.json","MessageInfo":[],"IsmBody":{"Mode":**true**}}
+{"SchemaType":"https://192.168.3.203:25566/ism/schema/v2/System/SystemSettingsFirmwareFtsFirmware-GET-Out.0.0.1.json","MessageInfo":[],"IsmBody":{"Mode":true}}
 ```
 2. Perform complete update of ISM repository from GlobalFlash
 ```shell
