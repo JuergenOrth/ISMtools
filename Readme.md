@@ -1,14 +1,12 @@
-# Ansible Modules for Infrastructure Manager
+# ISMtools for using ISM REST API
 
-This is the modules to manage Infrastructure Manager using Ansible playbooks.
+Here are some basic scripts to use the REST API for Infrastructure Manager (ISM)
 
 ## Requirements
 
-- Ansible Server
-  - Ansible 2.4 or later
-  - Python  2.6 or later
-- FUJITSU Software Infrastructure Manager
-  - 2.2.0 or later
+- bash
+- curl
+- optional jq
 
 ## Examples
 
