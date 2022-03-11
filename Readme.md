@@ -1,10 +1,11 @@
 # ISMtools for using ISM REST API
 
-Here are some basic scripts to use the REST API for Infrastructure Manager (ISM)
+Here are some basic scripts to use the REST API for Infrastructure Manager (ISM)  
+The number of tools/scripts will increase over time ...
 
 ## Requirements
 
-This toolset is intendet to be used in Linux environments. Alternatively it can be used in Windows environment where you can activate WSL (Windows Subsystem Linux) and e.g. install Ubuntu or Debian from Microsoft Store. You can also use [Cygwin](https://cygwin.org).
+This toolset is intendet to be used in Linux environments. Alternatively it can be used in Windows environment with activated WSL (Windows Subsystem Linux) and e.g. installed Ubuntu or Debian from Microsoft Store. You can also use [Cygwin](https://cygwin.org).
 
 Following commands are required:
 - bash
@@ -19,8 +20,8 @@ To use this toolset run the following steps:
 ### 1. Clone the repository
 
 ```shell
-git clone https://github.com/JuergenOrth/ISMtools.git
-cd ISMtools
+$ git clone https://github.com/JuergenOrth/ISMtools.git
+$ cd ISMtools
 ```
 or extract this [ZIP file](https://github.com/JuergenOrth/ISMtools/archive/refs/heads/master.zip).
 
@@ -30,9 +31,18 @@ Set the variables `ISM_IP`, `USER` and `PASSWD` by editing *.ism_env* at least.
 
 
 ```shell
-vi .ism_env		# or any other editor you prefer
-chmod go-rwx .ismenv 	# for security
+$ vi .ism_env		# or any other editor you prefer
+$ chmod go-rwx .ismenv 	# for security
 ```
+
+## Commands
+ 1. ism_cmd  
+Basic script to run REST call with different methods like GET, POST, PATCH, ..
+Usage: `ism_cmd <method> <rest_endpoint> [<additional_params ..>]  
+
+2. ism_gfupdate  
+Update complete firmware/driver repository of ISM from GlobalFlash. Please consider to have GlobalFlash enabled in ISM.
+Usage: `ism_gfupdate`
 
 ### 3. Certificate assignment for Infrastructure Manager
 
