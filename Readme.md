@@ -70,3 +70,4 @@ Starting download ...
 }
 
 ```
+To perform automatic updates on a regulary basis you can add a line like `0 21 * * * ~/ISMtools/ism_gfupdate` to your crontab file in order to run the script each evening at 9pm.  
