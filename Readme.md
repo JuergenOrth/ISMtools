@@ -38,11 +38,11 @@ $ vi .ism_env		# or any other editor you prefer
 ```
 
 ## Commands
- 1. ism_cmd  
+### 1. ism_cmd  
 Basic script to run REST call with different methods like GET, POST, PATCH, ..  
 Usage: `ism_cmd <method> <rest_endpoint> [<additional_params ..>]`  
 
-2. ism_gfupdate  
+### 2. ism_gfupdate  
 Update complete firmware/driver repository of ISM from GlobalFlash. Please consider to have GlobalFlash enabled in ISM. It take some minutes for downloading the current list of files. After that a download is iniated as task within ISM.  
 Usage: `ism_gfupdate`
 
