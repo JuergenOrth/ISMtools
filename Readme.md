@@ -38,7 +38,7 @@ $ chmod go-rwx .ismenv 	# for security
 ## Commands
  1. ism_cmd  
 Basic script to run REST call with different methods like GET, POST, PATCH, ..  
-Usage: `ism_cmd <method> <rest_endpoint> [<additional_params ..>]  
+Usage: `ism_cmd <method> <rest_endpoint> [<additional_params ..>]`  
 
 2. ism_gfupdate  
 Update complete firmware/driver repository of ISM from GlobalFlash. Please consider to have GlobalFlash enabled in ISM.  
