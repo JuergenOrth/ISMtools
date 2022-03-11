@@ -7,12 +7,12 @@ This toolset is provided W/O ANY WARRANTY and use at your own risk!
 
 ## Requirements
 
-This toolset is intendet to be used in Linux environments. Alternatively it can be used in Windows environment with activated WSL (Windows Subsystem Linux) and e.g. installed Ubuntu or Debian from Microsoft Store. You can also use [Cygwin](https://cygwin.org).
+This toolset is intended to be used in Linux environments. Alternatively it can be used in Windows environments with activated WSL (Windows Subsystem Linux) and installed Ubuntu or Debian for example from Microsoft Store. You can also use [Cygwin](https://cygwin.org).
 
 Following commands are required:
 - bash
-- sed
 - curl
+- sed
 - optional jq (to get pretty output)
 
 ## Setup
@@ -70,4 +70,6 @@ Starting download ...
 }
 
 ```
-To perform automatic updates on a regulary basis you can add a line like `0 21 * * * ~/ISMtools/ism_gfupdate` to your crontab file in order to run the script each evening at 9pm.  
+To perform automatic updates on a regular basis you can add a line like  
+`0 21 * * * ~/ISMtools/ism_gfupdate`  
+to your crontab file in order to run the script each evening at 9pm.  
