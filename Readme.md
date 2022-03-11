@@ -4,37 +4,34 @@ Here are some basic scripts to use the REST API for Infrastructure Manager (ISM)
 
 ## Requirements
 
+This toolset is intendet to be used in Linux environments. Alternatively it can be used in Windows environment where you can activate WSL (Windows Subsystem Linux) and e.g. install Ubuntu or Debian from Microsoft Store. You can also use [Cygwin](https://cygwin.org).
+
+Following commands are required:
 - bash
+- sed
 - curl
-- optional jq
-
-## Examples
-
-Sample playbooks and instructions on how to run the modules can be found in the examples directory.
+- optional jq (to get pretty output)
 
 ## Setup
 
-To run the Ansible modules and sample playbooks provided in this project, you should execute the following steps:
+To use this toolset run the following steps:
 
 ### 1. Clone the repository
 
-Run on the Ansible Server:
-
 ```shell
-cd /etc/ansible
-git clone https://github.com/fujitsu/ism-ansible.git
+git clone https://github.com/JuergenOrth/ISMtools.git
+cd ISMtools
 ```
+or extract this [ZIP file](https://github.com/JuergenOrth/ISMtools/archive/refs/heads/master.zip).
 
-### 2. Configure the ANSIBLE_LIBRARY environmental variable
+### 2. Edit the configfile
 
-Set the environment variables `ANSIBLE_LIBRARY` and `ANSIBLE_MODULE_UTILS`, `PYTHONPATH`, specifying the library full path from the cloned project.
+Set the variables `ISM_IP`, `USER` and `PASSWD` by editing *.ism_env* at least. 
 
-Run on the Ansible Server:
 
 ```shell
-export ANSIBLE_LIBRARY=/etc/ansible/ism-ansible/library
-export ANSIBLE_MODULE_UTILS=/etc/ansible/ism-ansible/library/module_utils/
-export PYTHONPATH=$PYTHONPATH:$ANSIBLE_LIBRARY
+vi .ism_env		# or any other editor you prefer
+chmod go-rwx .ismenv 	# for security
 ```
 
 ### 3. Certificate assignment for Infrastructure Manager
