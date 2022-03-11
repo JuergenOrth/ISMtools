@@ -33,8 +33,8 @@ Set the variables `ISM_IP`, `USER` and `PASSWD` by editing *.ism_env* at least.
 
 
 ```shell
+$ chmod go-rwx .ism_env	# for security
 $ vi .ism_env		# or any other editor you prefer
-$ chmod go-rwx .ismenv 	# for security
 ```
 
 ## Commands
@@ -43,7 +43,7 @@ Basic script to run REST call with different methods like GET, POST, PATCH, ..
 Usage: `ism_cmd <method> <rest_endpoint> [<additional_params ..>]`  
 
 2. ism_gfupdate  
-Update complete firmware/driver repository of ISM from GlobalFlash. Please consider to have GlobalFlash enabled in ISM.  
+Update complete firmware/driver repository of ISM from GlobalFlash. Please consider to have GlobalFlash enabled in ISM. It take some minutes for downloading the current list of files. After that a download is iniated as task within ISM.  
 Usage: `ism_gfupdate`
 
 
