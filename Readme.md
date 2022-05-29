@@ -13,7 +13,7 @@ Following commands are required:
 - bash
 - curl
 - sed
-- optional jq (to get pretty output)
+- optional jq (to get pretty output / needed for some scripts like ism_del_iso)
 
 ## Setup
 
@@ -29,8 +29,23 @@ or extract this [ZIP file](https://github.com/JuergenOrth/ISMtools/archive/refs/
 
 ### 2. Edit the configfile
 
-Set the variables `ISM_IP`, `USER` and `PASSWD` by editing *.ism_env* at least. 
+Set the variables `ISM`, `USER` and `PASSWD` by editing *.ism_env* at least. 
+Alterntively you can define environment vars `ISM_VA` and `ISM_CRED` to define the ISM virtual appliance address and user credentials respectivlely.
 
+Syntax:
+```
+ISM_VA=[ISM_IP|ISM_HOSTNAME|ISM_FQDN][:ISM_PORT]
+e.g.
+ISM_VA=myism.example.com	# Port will be $ISM_PORT in this case
+ISM_VA=192.168.1.2:1433
+ISM_VA=:433
+
+ISM_CRED=[USER][:PASSWORD]
+e.g.
+ISM_CRED=:verysecret	# user will be $USER in this case
+ISM_CRED=smith:somesecret
+ISM_CRED=foo		# password will be $PASSWD in this case
+```
 
 ```shell
 $ chmod go-rwx .ism_env	# for security
