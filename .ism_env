@@ -1,15 +1,15 @@
-# $Id: .ism_env 90 2022-03-11 10:43:09Z HMBJOrth $
+# $Id: .ism_env 94 2022-05-25 08:22:42Z HMBJOrth $
 #
 #
 # Settings for ISM tools based on bash and curl
 #
 
-# ISM_IP: IP Addr or name or FQDN of ISM VA. Last entry wins ;-)
-ISM_IP=172.17.198.115 	# Essential (Test)
-ISM_IP=10.172.125.138	# Advanced (Prod)
-ISM_IP=10.172.125.85	# Advanced (Test)
-ISM_IP=myism.fritz.box	# (Test)
-ISM_IP=192.168.3.203	# (Test)
+# ISM: IP Addr or name or FQDN of ISM VA. Last entry wins ;-)
+ISM=myism.fritz.box	# (Test)
+ISM=192.168.3.203	# (Test)
+ISM=172.17.198.115 	# Essential (Test)
+ISM=10.172.125.85	# Advanced (Test)
+ISM=10.172.125.138	# Advanced (Prod)
 
 # ISM_PORT: Listen port for https access (default: 25566)
 ISM_PORT=25566
@@ -24,9 +24,59 @@ PASSWD=admin
 CACERT=${0%/*}/DCMA.crt
 
 # DEFAULTOPTIONS: add. options for curl. Can be changed according to network
-DEFAULTOPTIONS="--silent --noproxy $ISM_IP"
+DEFAULTOPTIONS="--silent --noproxy $ISM"
 
-############################################################################
-# DON'T CHANGE LINES BELOW
-[ -x "$(type -p jq)" ]  && JQ="jq ." || JQ=cat
+##########################################################
+# Don't change lines below
+##########################################################
 
+# Overwrite ISM ISM_PORT w/ ENV vars ISM_VA to be more flexible
+if [ "$ISM_VA" ]
+then
+	if [[ "$ISM_VA" =~ .*:.* ]]
+	then
+		[ "${ISM_VA%:*}" ] && ISM=${ISM_VA%:*}
+		ISM_PORT=${ISM_VA#*:}
+	else
+		ISM=$ISM_VA
+	fi
+fi
+
+# Overwrite USER PASSWD w/ ENV var ISM_CRED to be more flexible
+if [ "$ISM_CRED" ]
+then
+	if [[ "$ISM_CRED" =~ .*:.* ]]
+	then
+		[ "${ISM_CRED%:*}" ] && USER=${ISM_CRED%:*}
+		PASSWD=${ISM_CRED#*:}
+	else
+		USER=$ISM_CRED
+	fi
+fi
+
+# Try to create readable output
+if [ -x "$(type -p jq)" ]
+then
+	JQ="jq ." 
+elif [ -x "$(type -p python)" ]
+then
+	JQ="python -m json.tool"
+elif [ -x "$(type -p python3)" ]
+then
+	JQ="python3 -m json.tool"
+else
+	JQ=cat
+fi
+
+# Get IP/FQDN for ISM
+# IP needed for PW hash / FQDN may be needed for TLS
+if [[ "$ISM" =~ ^[0-9]*\. ]] 
+then
+	ISM_IP=$ISM
+	ISM_FQDN=$ISM
+	host $ISM >/dev/null && ISM_FQDN=$(host $ISM | awk '{print $NF}')
+else
+	host $ISM >/dev/null && ISM_IP=$(host $ISM | awk '{print $NF}') || \
+		echo invalid fqdn: $ISM
+	[ "$ISM_IP" ] && ISM_FQDN=$(host $ISM | awk '{print $1}')
+fi
