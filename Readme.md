@@ -1,5 +1,9 @@
 # ISMtools for using ISM REST API
 
+## Important: This toolset is now available at [Github of Fujitsu](https://github.com/fujitsu/ISMtools).
+### This site will no longer be maintained!
+---
+
 Here are some basic scripts to use the REST API for Infrastructure Manager (ISM)  
 The number of tools/scripts will increase over time ...
 
